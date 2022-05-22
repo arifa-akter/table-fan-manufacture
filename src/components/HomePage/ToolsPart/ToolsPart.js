@@ -13,7 +13,7 @@ const ToolsPart = () => {
     return (
       <section className='mt-28 mb-28'>
       <div className="container mx-auto">
-          <h1 className='text-center font-bold lg:text-5xl text-2xl text-[#19D3AE] lg:mt-28 lg:mb-28'>Fan Spare Tools</h1>
+          <h1 className='text-center font-bold lg:text-5xl text-2xl text-[#020225ee] lg:mt-28 lg:mb-28'>Fan Spare Tools</h1>
          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
              {
                  fanTools.map(fanTool=><Tools
