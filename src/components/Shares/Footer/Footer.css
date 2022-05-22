@@ -1,0 +1,23 @@
+.footer{
+    background: #020225ee;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+.icon i{
+    color:#ffffff;
+    font-size: 16px;
+    padding:7px 7px;
+    background:#cecee291 ;
+    margin-right: 8px;
+}
+.border-bottom-style{
+   height: 1px;
+   width:100%;
+   background:white;
+}
+.copy-right{
+    width: 100%;
+}
+.copy-right h3{
+    text-align: center;
+}
