@@ -8,7 +8,7 @@ const OfferPart = () => {
                   <div>
                       <img src={banner} alt="" />
                   </div>
-                  <div>
+                  <div className='p-3'>
                       <p className='text-white  font-bold text-3xl pb-6'>Our Offer</p>
                       <p className='text-white  font-bold pb-6'>
                           here show some discount for manufacture part you can find 
