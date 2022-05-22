@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link, } from 'react-router-dom';
+import { Link,NavLink  } from 'react-router-dom';
 import profile from '../../../images/profile.png'
 import './Header.css'
 const Header = () => {
     const menuItem =  <>
-    <li><Link to="/" className="xl:text-lg font-medium text-white">Home</Link></li>
+    <li><NavLink to="/" className="xl:text-lg font-medium text-white">Home</NavLink></li>
     <li><Link to="" className="xl:text-lg font-medium text-white ">About</Link></li>
     <li><Link to="" className="xl:text-lg font-medium text-white">Appointment</Link></li>
     <li><Link to="" className="xl:text-lg font-medium text-white">Review</Link></li>
-    <li><Link to="" className="xl:text-lg font-medium text-white">contact us</Link></li>
+    <li><NavLink to="/blogs" className="xl:text-lg font-medium text-white">Blogs</NavLink></li>
     </>
 
     return (
@@ -27,11 +27,11 @@ const Header = () => {
                       <Link to="/login"> <span className="px-3 xl:text-lg font-medium">Login</span></Link>
                        } */}
   
-                     <Link to="/signUp"><span className="px-3 xl:text-lg font-medium">Register</span></Link>
+                     <Link to="/Register"><span className="px-3 xl:text-lg font-medium">Register</span></Link>
                  </div> 
              </div>
           </div>
-        <div className='bg-[rgba(0,211,172,0.23)]'>
+        <div className='bg-[rgba(0,0,0,0.57)]'>
         <div className="navbar p-0 container mx-auto  xl:container xl:mx-auto sm:container sm:mx-auto md:container md:mx-auto">
           <div className="navbar-start py-0">
             <div className="dropdown">
