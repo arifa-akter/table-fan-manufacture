@@ -1,0 +1,56 @@
+[
+    {
+      "id": 1,
+      "image": "https://i.ibb.co/S5NpJLR/polypropylene.jpg",
+      "name": "Fan Blades",
+      "perUnitPrice": 5,
+      "minimumQuantity": 50,
+      "availableQuantity": 200,
+      "description": "this fan blades hse 3 part blue color for table fan it 3 year grenty "
+    },
+    {
+      "id": 2,
+      "image": "https://i.ibb.co/0cM3DF0/fanSpare.jpg",
+      "name": "Poly Propylene fan spare part",
+      "perUnitPrice": 10,
+      "minimumQuantity": 100,
+      "availableQuantity": 1000,
+      "description": "this Poly Propylene fan spare part for table fan you can buy minimum 10 pice it 3 year grenty "
+    },
+    {
+      "id": 3,
+      "image": "https://i.ibb.co/4MrWNdz/Solar-Stant.jpg",
+      "name": "Solder-stand-fan-body",
+      "perUnitPrice": 11,
+      "minimumQuantity": 10,
+      "availableQuantity": 100,
+      "description": "this fan Solder-stand-fan-body and you can buy 10 pice it 2 year grenty "
+    },
+    {
+      "id": 4,
+      "image": "https://i.ibb.co/XLv5ZkG/motor.jpg",
+      "name": "switch-spare-part",
+      "perUnitPrice": 5,
+      "minimumQuantity": 50,
+      "availableQuantity": 200,
+      "description": "this switch-spare-part this body is plastic you can buy minimum 100 pice 3 year grenty "
+    },
+    {
+      "id": 5,
+      "image": "https://i.ibb.co/0cM3DF0/fanSpare.jpg",
+      "name": "table fan motor spare part",
+      "perUnitPrice": 5,
+      "minimumQuantity": 50,
+      "availableQuantity": 100,
+      "description": "this table fan motor spare part you can buy minimum 50 pice  3 year grenty "
+    },
+    {
+      "id": 6,
+      "image": "https://i.ibb.co/bdnNPR9/banner2.jpg",
+      "name": "plastic gear box",
+      "perUnitPrice": 10,
+      "minimumQuantity": 100,
+      "availableQuantity": 200,
+      "description": "this plastic gear box you can buy minimum 100 pice it 3 year grenty "
+    }
+  ]
