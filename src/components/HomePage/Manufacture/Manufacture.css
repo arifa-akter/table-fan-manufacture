@@ -1,0 +1,19 @@
+.fan-Wholesale h1{
+    display: inline-block;
+    padding: 5px 5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    border: 1px solid #ddd;
+    color:#1a1a1dee;
+    background:#ddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+.fan-Wholesale h1:hover{
+    background-color: #020225ee;
+    color:#ffffff;
+}
