@@ -1,0 +1,15 @@
+.banner{
+    background: url(../../../images/banner.jpg) no-repeat center;
+    background-size: cover;
+    padding-top:260px;
+    padding-bottom:260px;
+    position: relative;
+}
+.Overlay-text{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 0, 0.3);
+}

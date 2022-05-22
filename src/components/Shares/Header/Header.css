@@ -1,0 +1,39 @@
+.header-section{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 50;
+}
+.header-Tital{
+    border: none;
+    background: none;
+    color:#ffffff
+}
+.header-Tital:hover{
+    border: none;
+    background: none;
+}
+.first-header{
+    position:relative;
+    background:#090979;
+}
+.first-header span{
+    color:#ffffff;
+}
+.first-header::after{
+    position:absolute;
+    content:'';
+    width:100%;
+    height:2px;
+    bottom:0;
+    left:0;
+    background:#19D3AE;
+}
+.header-menu li a{
+    line-height: 41px; 
+}
+.header-menu li a:hover{
+    background: #090979;
+    color:#ffffff;
+}
