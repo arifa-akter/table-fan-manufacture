@@ -1,10 +1,12 @@
 // import React, { useEffect, useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../Authentication/Loading';
+import DeleteModal from './DeleteModal';
 import ManageProductTable from './ManageProductTable';
 
 const ManageProduct = () => {
+    const [deleteModal ,setDeleteModal] =useState(null)
     const {data: manageProduct ,isLoading ,refetch} = useQuery('manageProduct',
     ()=> fetch( 'http://localhost:5000/tools',).then(res=>{
         return res.json()
@@ -15,7 +17,8 @@ const ManageProduct = () => {
     }
     return (
         <section className='mt-11'>
-                <div className="overflow-x-auto">
+             <div>
+             <div className="overflow-x-auto">
                <table className="table table-compact w-full">
                 <thead>
                 <tr>
@@ -36,11 +39,20 @@ const ManageProduct = () => {
                   product={product}
                   index={index}
                   refetch={refetch}
+                  setDeleteModal ={setDeleteModal}
                   ></ManageProductTable>) 
                }
                 </tbody>
                 </table>
                </div>
+               {
+                   deleteModal && <DeleteModal
+                   deleteModal={deleteModal}
+                   refetch={refetch}
+                   setDeleteModal ={setDeleteModal}
+                   ></DeleteModal>
+               }
+             </div>
         </section>
     );
 };
