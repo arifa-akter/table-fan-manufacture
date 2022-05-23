@@ -10,13 +10,16 @@ const Header = () => {
     const [user] = useAuthState(auth);
     const logout = () => {
       signOut(auth);
-      localStorage.removeItem('accessToken')
+      // localStorage.removeItem('accessToken')
     };
     const menuItem =  <>
     <li><NavLink to="/" className="xl:text-lg font-medium text-white">Home</NavLink></li>
     <li><Link to="" className="xl:text-lg font-medium text-white ">About</Link></li>
     <li><Link to="" className="xl:text-lg font-medium text-white">Appointment</Link></li>
-    <li><Link to="" className="xl:text-lg font-medium text-white">Review</Link></li>
+   {
+     user &&  <li><NavLink to="/dashboard" className="xl:text-lg font-medium text-white">DashBoard</NavLink></li>
+   }
+
     <li><NavLink to="/blogs" className="xl:text-lg font-medium text-white">Blogs</NavLink></li>
     </>
 
