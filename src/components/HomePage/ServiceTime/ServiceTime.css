@@ -1,5 +1,5 @@
 .service-banner{
-    background: url(../../../images/banner6.jpg) no-repeat center;
+    background: url(../../../images/background1.png) no-repeat center;
     background-size: cover;
     padding-top:200px;
     padding-bottom:200px;
@@ -11,5 +11,5 @@
     left: 10%;
     width: 80%;
     height: 80%;
-    background: rgba(0, 0, 0, 0.466);
+    background:rgba(25, 210, 173, 0.37);
 }

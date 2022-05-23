@@ -1,8 +1,17 @@
 import React from 'react';
 import { Link,NavLink  } from 'react-router-dom';
 import profile from '../../../images/profile.png'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
 import './Header.css'
+import auth from '../../../firebase.init'
 const Header = () => {
+
+    const [user] = useAuthState(auth);
+    const logout = () => {
+      signOut(auth);
+      localStorage.removeItem('accessToken')
+    };
     const menuItem =  <>
     <li><NavLink to="/" className="xl:text-lg font-medium text-white">Home</NavLink></li>
     <li><Link to="" className="xl:text-lg font-medium text-white ">About</Link></li>
@@ -19,13 +28,19 @@ const Header = () => {
                     {/* <img style={{width:'30px',height:'30px' ,borderRadius:'50%'}} src={fluoride} alt="" /> */}
                 </div>
                  <div className="login-sign flex items-center ">
-                      <span> <img className='lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] rounded-full'  src={profile} alt="" /></span>
-                      <Link to="/login"> <span className="px-3 xl:text-lg font-medium">Login</span></Link>
-                      {/* {user?
+                      <span className='text-white pr-2'>{user?.displayName}</span>
+                      {
+                        user?
+                        <span> <img className='lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] rounded-full'  src={user?.photoURL} alt="" /></span>
+                        :
+                        <span> <img className='lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] rounded-full'  src={profile} alt="" /></span>
+                      }
+ 
+                      {user?
                       <button onClick={logout} className="px-3 xl:text-lg font-medium cursor-pointer text-white">signOut</button>
                       :
                       <Link to="/login"> <span className="px-3 xl:text-lg font-medium">Login</span></Link>
-                       } */}
+                       }
   
                      <Link to="/Register"><span className="px-3 xl:text-lg font-medium">Register</span></Link>
                  </div> 

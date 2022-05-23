@@ -1,13 +1,73 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from  "react-hook-form";
-import { Link } from 'react-router-dom';
+import { useSignInWithGoogle ,useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init'
 const Login = () => {
+     // sIgn in with Google
+     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+     // sign in with email and password
+     const [signInWithEmailAndPassword,user,loading,error, ] = useSignInWithEmailAndPassword(auth);
+ 
+     // react hook form
+        const { register, formState: { errors }, handleSubmit } = useForm();
     
-    // react hook form
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => {
-        console.log(data)
-    };
+    //  // userToken
+    //  const[token]= useToken(user||gUser)
+ 
+     // user navigate from login to appointment
+     let navigate = useNavigate();
+    //  let location = useLocation();
+    //  let from = location.state?.from?.pathname || "/";
+    if(user|| gUser){
+      navigate('/')
+    }
+ 
+    //  useEffect(()=>{
+    //    if(user || gUser){
+    //      navigate(from, { replace: true });
+    //        console.log(user , gUser)
+    //    }
+    //  },[user,gUser ,navigate,from])
+     // user part
+    //  useEffect (()=>{
+    //    console.log(token)
+    //    if(token){
+    //      navigate(from, { replace: true });
+      
+    //    }
+    //  },[token,navigate, from])
+   
+   
+     // loading part start
+     let loginLoading
+     if(loading||gLoading){
+       loginLoading =<div class="flex items-center justify-center space-x-2 animate-bounce">
+       <div class="w-3 h-3 bg-primary rounded-full"></div>
+       <div class="w-3 h-3 bg-secondary rounded-full"></div>
+       <div class="w-3 h-3 bg-primary rounded-full"></div>
+   </div>
+     }
+     // error part start
+     let loginError;
+     if(error){
+      loginError = <p className='text-red-600 '> 
+       <i className="fa fa-exclamation-circle text-red-600 pr-2" aria-hidden="true"></i>
+        user does not found </p>
+     }
+     if(gError){
+      loginError = <p className='text-red-600 '> 
+       <i className="fa fa-exclamation-circle text-red-600 pr-2" aria-hidden="true"></i>
+       Google popUp closed try again </p>
+     }
+ 
+     // form submit part start 
+     const onSubmit = data => {
+         console.log(data)
+         signInWithEmailAndPassword(data.email ,data.password)
+     };
+    
     return (
         <section className='container mx-auto lg:mt-40 lg:mb-28 mb-11 mt-28'>
         <div className="flex justify-center items-center lg:m-0 m-5">
@@ -86,14 +146,14 @@ const Login = () => {
                    }
                  </label>
               </div>
-              {/* {loginLoading}
-              {loginError} */}
+              {loginLoading}
+              {loginError}
               <button type="submit"className="btn input-bordered w-full max-w-xs bg-primary">Login</button>
               <span className='text-accent'>New to Doctor portal? </span>
               <Link to="/register" ><span className='text-primary'>creat a new account</span></Link>
             </form>
           <div className="divider">OR</div>
-          <button className="btn btn-outline">CONTINUE WITH GOOGLE</button>
+          <button className="btn btn-outline" onClick={()=>signInWithGoogle()}>CONTINUE WITH GOOGLE</button>
          </div>
        </div>
       </div>

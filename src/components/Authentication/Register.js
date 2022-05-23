@@ -1,12 +1,67 @@
 import React from 'react';
 import { useForm } from  "react-hook-form";
-import { Link } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile} from 'react-firebase-hooks/auth';
+import { Link,useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init'
 const Register = () => {
-      // react hook form
-      const { register, formState: { errors }, handleSubmit } = useForm();
-      const onSubmit = data => {
-          console.log(data)
-      };
+    // sIgn in with Google
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    // creat a new user with email and password
+    const [createUserWithEmailAndPassword,user,loading,error,] = useCreateUserWithEmailAndPassword(auth);
+    // react hook form
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    // update profile
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    // user part
+    const navigate = useNavigate()
+    // useToken use form custom hook
+    // const [token] = useToken(user || gUser)
+    // if(user || gUser){
+    //     console.log(user)
+    // }
+    // if(token){
+    // navigate('/appointment')
+    // }
+    if(user || gUser){
+      console.log(user ,gUser)
+      navigate('/')
+    }
+    // loading part start
+    let loginLoading
+    if(loading||gLoading ||updating){
+      loginLoading =<div class="flex items-center justify-center space-x-2 animate-bounce">
+      <div class="w-3 h-3 bg-black rounded-full"></div>
+      <div class="w-3 h-3 bg-red-600 rounded-full"></div>
+      <div class="w-3 h-3 bg-black rounded-full"></div>
+  </div>
+    }
+    // error part start
+    let loginError;
+    if(error){
+     loginError = <p className='text-red-600 '> 
+      <i className="fa fa-exclamation-circle text-red-600 pr-2" aria-hidden="true"></i>
+       user already exist</p>
+    }
+    if(updateError){
+     loginError = <p className='text-red-600 '> 
+      <i className="fa fa-exclamation-circle text-red-600 pr-2" aria-hidden="true"></i>
+       user Dose not update</p>
+    }
+    if(gError){
+     loginError = <p className='text-red-600 '> 
+      <i className="fa fa-exclamation-circle text-red-600 pr-2" aria-hidden="true"></i>
+      Google popUp closed try again </p>
+    }
+
+    // form submit part start 
+    const onSubmit = async data => {
+        console.log(data)
+        await createUserWithEmailAndPassword(data.email , data.password)
+        await updateProfile({ displayName :data.name});
+        console.log('Updated profile');
+        navigate('/')
+    };
+     
     return (
         <section className='container mx-auto lg:mt-40 lg:mb-28 mb-11 mt-28'>
         <div className="flex justify-center items-center lg:m-0 m-5">
@@ -108,14 +163,14 @@ const Register = () => {
                    }
                  </label>
               </div>
-              {/* {loginLoading}
-              {loginError} */}
+              {loginLoading}
+              {loginError}
               <button type="submit"className="btn input-bordered w-full max-w-xs bg-primary">Register</button>
               <span className='text-accent'><small>already have an account</small></span>
               <Link to="/login" ><span className='text-primary'><small>Login</small></span></Link>
             </form>
           <div className="divider">OR</div>
-          <button className="btn btn-outline">CONTINUE WITH GOOGLE</button>
+          <button className="btn btn-outline"onClick={()=>signInWithGoogle()}>CONTINUE WITH GOOGLE</button>
          </div>
        </div>
       </div>
