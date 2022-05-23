@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Tools from './Tools';
 
-
 const ToolsPart = () => {
     const [fanTools ,setFanTools] = useState([])
     console.log(fanTools)

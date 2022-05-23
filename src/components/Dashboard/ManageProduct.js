@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+import Loading from '../Authentication/Loading';
 import ManageProductTable from './ManageProductTable';
 
 const ManageProduct = () => {
-    const [manageProduct ,setManageProduct] = useState([])
-    console.log(manageProduct)
-    useEffect(()=>{
-        fetch('http://localhost:5000/tools')
-        .then(res=>res.json())
-        .then(data=>setManageProduct(data))
-    },[])
+    const {data: manageProduct ,isLoading ,refetch} = useQuery('manageProduct',
+    ()=> fetch( 'http://localhost:5000/tools',).then(res=>{
+        return res.json()
+       }
+        ))
+    if(isLoading){
+    return<Loading></Loading>
+    }
     return (
         <section className='mt-11'>
                 <div className="overflow-x-auto">
@@ -27,10 +31,11 @@ const ManageProduct = () => {
                 </thead>
                 <tbody>
                {
-                  manageProduct.map((product ,index)=><ManageProductTable
+                  manageProduct?.map((product ,index)=><ManageProductTable
                   key={product._id}
                   product={product}
                   index={index}
+                  refetch={refetch}
                   ></ManageProductTable>) 
                }
                 </tbody>
