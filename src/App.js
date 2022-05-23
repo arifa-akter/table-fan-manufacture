@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import { Route, Routes } from 'react-router-dom'
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
 import Blogs from './components/Blogs/Blogs';
@@ -37,6 +38,7 @@ function App() {
         <Route path="*" element={<NotFound></NotFound>} ></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }
