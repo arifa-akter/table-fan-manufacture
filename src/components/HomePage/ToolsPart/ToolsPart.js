@@ -6,7 +6,7 @@ const ToolsPart = () => {
     const [fanTools ,setFanTools] = useState([])
     console.log(fanTools)
     useEffect(()=>{
-        fetch('toolsPartCollection.json')
+        fetch('http://localhost:5000/tools')
         .then(res=>res.json())
         .then(data=>setFanTools(data))
     },[])
@@ -17,7 +17,7 @@ const ToolsPart = () => {
          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
              {
                  fanTools.map(fanTool=><Tools
-                 key={fanTool.id}
+                 key={fanTool._id}
                  fanTool={fanTool}
                  ></Tools>)
              }

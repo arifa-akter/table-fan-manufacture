@@ -3,6 +3,7 @@ import { useForm } from  "react-hook-form";
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile} from 'react-firebase-hooks/auth';
 import { Link,useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init'
+import useToken from '../../hooks/useToken';
 const Register = () => {
     // sIgn in with Google
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -15,24 +16,21 @@ const Register = () => {
     // user part
     const navigate = useNavigate()
     // useToken use form custom hook
-    // const [token] = useToken(user || gUser)
+    const [token] = useToken(user || gUser)
     // if(user || gUser){
     //     console.log(user)
     // }
-    // if(token){
-    // navigate('/appointment')
-    // }
-    if(user || gUser){
-      console.log(user ,gUser)
-      navigate('/')
+    if(token){
+    navigate('/')
     }
+ 
     // loading part start
     let loginLoading
     if(loading||gLoading ||updating){
       loginLoading =<div class="flex items-center justify-center space-x-2 animate-bounce">
-      <div class="w-3 h-3 bg-black rounded-full"></div>
-      <div class="w-3 h-3 bg-red-600 rounded-full"></div>
-      <div class="w-3 h-3 bg-black rounded-full"></div>
+      <div class="w-3 h-3 bg-primary rounded-full"></div>
+      <div class="w-3 h-3 bg-secondary rounded-full"></div>
+      <div class="w-3 h-3 bg-primary rounded-full"></div>
   </div>
     }
     // error part start
