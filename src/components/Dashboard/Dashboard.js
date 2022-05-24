@@ -1,6 +1,11 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import {Link, NavLink, Outlet } from 'react-router-dom';
+import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin'
 const Dashboard = () => {
+  const [user] = useAuthState(auth)
+  const [admin] = useAdmin(user)
     return (
       <section className='pt-28'>
         <div className="drawer drawer-mobile">
@@ -16,10 +21,15 @@ const Dashboard = () => {
          <li className="font-bold text-white"><Link to="/dashboard">My Order</Link></li>
          <li className="font-bold text-white"><NavLink to="/dashboard/addReview">Add Review</NavLink></li>
          <li className="font-bold text-white"><NavLink to="/dashboard/MyProfile">My Profile</NavLink></li>
+       {
+         admin &&<>
+         <li className="font-bold text-white"><NavLink to="/dashboard/MyProfile">My Profile</NavLink></li>
          <li className="font-bold text-white"><NavLink to="/dashboard/manageOrder">Manage Order</NavLink></li>
          <li className="font-bold text-white"><NavLink to="/dashboard/addProduct">Add Product</NavLink></li>
          <li className="font-bold text-white"><NavLink to="/dashboard/makeAdmin">Make Admin</NavLink></li>
          <li className="font-bold text-white"><NavLink to="/dashboard/manageProduct">Manage product</NavLink></li>
+         </>
+       }
        </ul>
      
        </div>

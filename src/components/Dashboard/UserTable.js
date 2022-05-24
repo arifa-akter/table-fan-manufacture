@@ -10,7 +10,12 @@ const UserTable = ({user , index , refetch}) => {
                 'authorization':`Bearer ${localStorage.getItem('accessToken')}`
             }
             })
-            .then(res=>res.json())
+            .then(res=>{
+                if(res.status === 403){
+                   toast.error('field to fetch you cannot make admin')
+                }
+                 return res.json()
+             })
             .then(data => {
                 if(data.modifiedCount >0){
                     refetch()
