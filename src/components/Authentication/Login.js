@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { useForm } from  "react-hook-form";
-import { useSignInWithGoogle ,useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle ,useSignInWithEmailAndPassword ,useSendPasswordResetEmail} from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init'
 import useToken from '../../hooks/useToken';
+import { toast } from 'react-toastify';
 const Login = () => {
+  const emailRef = useRef('')
+  console.log(emailRef.current.value)
      // sIgn in with Google
      const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
      // sign in with email and password
      const [signInWithEmailAndPassword,user,loading,error, ] = useSignInWithEmailAndPassword(auth);
- 
+    //  password reset
+     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
      // react hook form
         const { register, formState: { errors }, handleSubmit } = useForm();
     
@@ -28,7 +32,6 @@ const Login = () => {
      useEffect(()=>{
        if(user || gUser){
          navigate(from, { replace: true });
-          //  console.log(user , gUser)
        }
      },[user,gUser ,navigate,from])
      // user part
@@ -64,10 +67,26 @@ const Login = () => {
      }
  
      // form submit part start 
-     const onSubmit = data => {
+     const onSubmit = async data => {
          console.log(data)
          signInWithEmailAndPassword(data.email ,data.password)
+      
      };
+     const resetPassword= async()=>{
+      const email = emailRef.current.value
+      console.log(email)
+      if(email){
+          await sendPasswordResetEmail(email);
+          toast('Sent email please check email and set password');
+      }
+      else{
+          toast('please enter email'); 
+      }
+    
+   }
+         
+
+
     
     return (
         <section className='container mx-auto lg:mt-40 lg:mb-28 mb-11 mt-28'>
@@ -81,6 +100,7 @@ const Login = () => {
                    <span class="label-text">Email</span>
                  </label>
                  <input type="email" 
+                 ref={emailRef}
                  placeholder="your email" 
                  className="input input-bordered w-full max-w-xs"
                  {...register("email", {
@@ -130,7 +150,6 @@ const Login = () => {
                      
                    })}
                   />
-                  <span className='text-accent' >Forget password ?</span>
                  <label className='mt-4 mb-4'>
                    { errors.password?.type === 'required' &&
                     <>
@@ -149,8 +168,9 @@ const Login = () => {
               </div>
               {loginLoading}
               {loginError}
+              <span className='text-secondary'type="submit" onClick={resetPassword}>Forget password</span>
               <button type="submit"className="btn input-bordered w-full max-w-xs bg-primary">Login</button>
-              <span className='text-accent'>New to Doctor portal? </span>
+              <span className='text-secondary'>New to Doctor portal? </span>
               <Link to="/register" ><span className='text-primary'>creat a new account</span></Link>
             </form>
           <div className="divider">OR</div>

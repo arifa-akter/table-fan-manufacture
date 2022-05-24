@@ -8,7 +8,7 @@ const Register = () => {
     // sIgn in with Google
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     // creat a new user with email and password
-    const [createUserWithEmailAndPassword,user,loading,error,] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword,user,loading,error,] = useCreateUserWithEmailAndPassword(auth ,{sendEmailVerification:true});
     // react hook form
     const { register, formState: { errors }, handleSubmit } = useForm();
     // update profile
@@ -164,7 +164,7 @@ const Register = () => {
               {loginLoading}
               {loginError}
               <button type="submit"className="btn input-bordered w-full max-w-xs bg-primary">Register</button>
-              <span className='text-accent'><small>already have an account</small></span>
+              <span className='text-secondary'><small>already have an account</small></span>
               <Link to="/login" ><span className='text-primary'><small>Login</small></span></Link>
             </form>
           <div className="divider">OR</div>
