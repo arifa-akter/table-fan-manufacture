@@ -3,6 +3,7 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
+import RequireAdmin from './components/Authentication/RequireAdmin';
 import RequireAuth from './components/Authentication/RequireAuth';
 import Blogs from './components/Blogs/Blogs';
 import AddProduct from './components/Dashboard/AddProduct';
@@ -39,10 +40,10 @@ function App() {
         <Route index element={<MyOrder></MyOrder>}></Route>
         <Route path="addReview" element={<AddReview></AddReview>}></Route>
         <Route path="myProfile" element={<MyProfile></MyProfile>}></Route>
-        <Route path="manageOrder" element={<ManageOrder></ManageOrder>}></Route>
-        <Route path="addProduct" element={<AddProduct></AddProduct>}></Route>
-        <Route path="makeAdmin" element={<MakeAdmin></MakeAdmin>}></Route>
-        <Route path="manageProduct" element={<ManageProduct></ManageProduct>}></Route>
+        <Route path="manageOrder" element={<RequireAdmin><ManageOrder></ManageOrder></RequireAdmin>}></Route>
+        <Route path="addProduct" element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
+        <Route path="makeAdmin" element={<RequireAdmin><MakeAdmin></MakeAdmin></RequireAdmin>}></Route>
+        <Route path="manageProduct" element={<RequireAdmin><ManageProduct></ManageProduct></RequireAdmin>}></Route>
         </Route>
         <Route path="*" element={<NotFound></NotFound>} ></Route>
       </Routes>
