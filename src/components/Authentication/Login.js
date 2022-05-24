@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from  "react-hook-form";
 import { useSignInWithGoogle ,useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init'
 import useToken from '../../hooks/useToken';
 const Login = () => {
@@ -19,18 +19,18 @@ const Login = () => {
  
      // user navigate from login to appointment
      let navigate = useNavigate();
-    //  let location = useLocation();
-    //  let from = location.state?.from?.pathname || "/";
+     let location = useLocation();
+     let from = location.state?.from?.pathname || "/";
     if(token){
       navigate('/')
     }
  
-    //  useEffect(()=>{
-    //    if(user || gUser){
-    //      navigate(from, { replace: true });
-    //        console.log(user , gUser)
-    //    }
-    //  },[user,gUser ,navigate,from])
+     useEffect(()=>{
+       if(user || gUser){
+         navigate(from, { replace: true });
+          //  console.log(user , gUser)
+       }
+     },[user,gUser ,navigate,from])
      // user part
     //  useEffect (()=>{
     //    console.log(token)
