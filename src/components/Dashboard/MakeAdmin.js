@@ -3,8 +3,13 @@ import { useQuery } from 'react-query';
 import Loading from '../Authentication/Loading'
 import UserTable from './UserTable';
 const MakeAdmin = () => {
-    const {data: users ,isLoading} = useQuery('users',
-    ()=> fetch( 'http://localhost:5000/user',).then(res=>{
+    const {data: users ,isLoading , refetch} = useQuery('users',
+    ()=> fetch( 'http://localhost:5000/user', {
+        method:'GET',
+        headers:{
+            authorization:`Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res=>{
         return res.json()
        }
         ))
@@ -31,6 +36,7 @@ const MakeAdmin = () => {
                key={user._id}
                index ={index}
                user={user}
+               refetch={refetch}
                ></UserTable>)
            }
         </tbody>

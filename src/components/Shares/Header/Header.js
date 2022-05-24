@@ -10,7 +10,7 @@ const Header = () => {
     const [user] = useAuthState(auth);
     const logout = () => {
       signOut(auth);
-      // localStorage.removeItem('accessToken')
+      localStorage.removeItem('accessToken')
     };
     const menuItem =  <>
     <li><NavLink to="/" className="xl:text-lg font-medium text-white">Home</NavLink></li>

@@ -25,23 +25,14 @@ const Login = () => {
      let navigate = useNavigate();
      let location = useLocation();
      let from = location.state?.from?.pathname || "/";
-    if(token){
-      navigate('/')
-    }
- 
-     useEffect(()=>{
-       if(user || gUser){
+    //  navigate user with jwt token
+     useEffect (()=>{
+       console.log(token)
+       if(token){
          navigate(from, { replace: true });
-       }
-     },[user,gUser ,navigate,from])
-     // user part
-    //  useEffect (()=>{
-    //    console.log(token)
-    //    if(token){
-    //      navigate(from, { replace: true });
       
-    //    }
-    //  },[token,navigate, from])
+       }
+     },[token,navigate, from])
    
    
      // loading part start

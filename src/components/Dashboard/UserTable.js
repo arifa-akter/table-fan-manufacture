@@ -1,12 +1,31 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
-const UserTable = ({user , index}) => {
-    const{email} = user
+const UserTable = ({user , index , refetch}) => {
+    const {email ,role}=user
+    const addAdmin=()=>{
+        fetch(`http://localhost:5000/user/admin/${email}`,{
+            method:'PUT',
+            headers:{
+                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
+            }
+            })
+            .then(res=>res.json())
+            .then(data => {
+                if(data.modifiedCount >0){
+                    refetch()
+                    console.log(data)
+                    toast.success (`successfully made an admin`)
+                }
+               
+            })
+    }
+ 
     return (
         <tr>
         <th>{index+1}</th>
         <td>{email}</td>
-        <td><button className="btn btn-xs bg-accent">Make Admin</button></td>
+        <td>{ role!== 'admin'&& <button onClick={addAdmin} className="btn btn-xs">make Admin</button>}</td>
         <td><button className="btn btn-xs bg-accent">X</button></td>
         </tr>
     );

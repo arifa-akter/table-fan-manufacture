@@ -17,9 +17,7 @@ const Register = () => {
     const navigate = useNavigate()
     // useToken use form custom hook
     const [token] = useToken(user || gUser)
-    // if(user || gUser){
-    //     console.log(user)
-    // }
+
     if(token){
     navigate('/')
     }
@@ -57,7 +55,6 @@ const Register = () => {
         await createUserWithEmailAndPassword(data.email , data.password)
         await updateProfile({ displayName :data.name});
         console.log('Updated profile');
-        navigate('/')
     };
      
     return (
