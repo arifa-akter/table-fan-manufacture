@@ -1,7 +1,11 @@
 import React from 'react';
-
+import { useNavigate} from 'react-router-dom';
 const Tools = ({fanTool}) => {
-    const {image ,name ,description,perUnitPrice,minimumQuantity,availableQuantity} =fanTool
+    const {_id ,image ,name ,description,perUnitPrice,minimumQuantity,availableQuantity} =fanTool
+    const navigate = useNavigate()
+    const handlePurchase =(id)=>{
+      navigate(`/purchase/${id}`)
+    }
     return (
         <div className="card bg-base-100 shadow-xl m-3">
         <figure className="px-10 pt-10">
@@ -14,7 +18,7 @@ const Tools = ({fanTool}) => {
           <p><span className='text-primary font-medium'>available Quantity</span> :{availableQuantity}</p>
           <p><span className='text-primary font-medium'>description:</span> {description}</p>
           <div className="card-actions">
-            <button className="btn btn-primary text-white">Buy Now</button>
+            <button className="btn btn-primary text-white" onClick={()=>handlePurchase(_id)}>Buy Now</button>
           </div>
         </div>
       </div>
