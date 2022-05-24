@@ -13,7 +13,8 @@ const AddProduct = () => {
             perUnitPrice:data.perUnitPrice,
             minimumQuantity: data.minimumQuantity,
             availableQuantity: data.availableQuantity,
-            description:data.description
+            description:data.description,
+            mQuantity:data.mQuantity
         }
         console.log(tools)
         fetch('http://localhost:5000/tools' ,{
@@ -148,6 +149,30 @@ const AddProduct = () => {
                  placeholder="product available quantity" 
                  className="input input-bordered w-full max-w-xs"
                  {...register("availableQuantity", {
+                     required:{
+                       value:true,
+                       message:'name required enter name'
+                     }  
+                   })}
+                  />
+                 <label className='mt-2 mb-2'>
+                 { errors.name?.type === 'required' &&
+                 <>
+                 <i className="fa fa-exclamation-circle text-red-600 pr-2" aria-hidden="true"></i> 
+                 <span class="label-text-alt text-red-600 ">{errors.name.message}</span>
+                 </> 
+                  }
+                 </label>
+              </div>
+              <div class="form-control w-full max-w-xs">
+                 <label class="label">
+                   <span class="label-text">mQuantity</span>
+                 </label>
+                 <input 
+                 type="number" 
+                 placeholder="product mQuantity" 
+                 className="input input-bordered w-full max-w-xs"
+                 {...register("mQuantity", {
                      required:{
                        value:true,
                        message:'name required enter name'

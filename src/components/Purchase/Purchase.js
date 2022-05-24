@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 
 const Purchase = () => {
     const [user] = useAuthState(auth)
-    console.log(user)
     const {id} =useParams()
     const [purchase, setPurchase] =useState({})
-    const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name } =purchase
-    console.log(purchase)
+    const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name ,mQuantity} =purchase
        const [reload ,setIsReload] =useState(true)
     useEffect(()=>{
         fetch(`http://localhost:5000/tools/${id}`)
@@ -20,6 +19,89 @@ const Purchase = () => {
         })
     },[id , reload])
 
+    const QuantityIncrease =(event) =>{
+        event.preventDefault()
+        if(event.target.increase.value < 0 || event.target.increase.value === '0' ){
+            toast.error('quantity value is more then 0 please increase quantity')
+        }
+        //  if(event.target.increase.value<mQuantity){
+        //     toast.error('you cannot buy less then minQuantity')
+        // }
+        //  if(event.target.increase.value>availableQuantity){
+        //     toast.error('you cannot buy more then available quantity please put valid value')
+
+        // }
+        else{
+            const quantityData={
+                quantity:parseInt(event.target.increase.value)+parseInt(minimumQuantity)
+            }
+            fetch (`http://localhost:5000/tools/${id}`,{
+                method: 'PUT',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(quantityData)
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log('success data',data)
+              })
+        }
+
+    }
+    const handleDecrease =(event) =>{
+        event.preventDefault()
+        const quantityData={
+            quantity:parseInt(minimumQuantity)-parseInt(1)
+        }
+        fetch (`http://localhost:5000/tools/${id}`,{
+            method: 'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(quantityData)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log('success data',data)
+
+          })
+
+    }
+
+    // handle order
+    const handleOrder=(event)=>{
+        event.preventDefault()
+        const orders={
+            product:name,
+            Quantity:minimumQuantity,
+            price:perUnitPrice,
+            email:user?.email,
+            address:event.target.address.value,
+            phone:event.target.number.value
+
+        }
+        console.log(orders)
+        fetch('http://localhost:5000/order' ,{
+            method:'POST',
+            headers:{
+                'content-type':'application/json',
+            },
+            body:JSON.stringify(orders)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.insertedId){
+                toast.success(' order submit successfully')
+            }
+            else{
+                toast.error(' order does not submit')
+            }
+            console.log(data)
+        })
+
+    }
+
     return (
         <section className='lg:mt-40 mt-20 mb-28'>
             <div className="container mx-auto">
@@ -29,17 +111,18 @@ const Purchase = () => {
                           <img style={{width:'200px', height:'200px'}}src={image} alt="" />
                           <h1 className='pt-2'>name: {name}</h1>
                           <h1 className='pt-2'><span className='text-primary font-bold'>per unit price</span> ${perUnitPrice}</h1>
-                          <h1 className='pt-2'><span className='text-primary font-bold'>minimumQuantity</span> {minimumQuantity}</h1>
+                          <h1 className='pt-2'><span className='text-primary font-bold'>Quantity</span> {minimumQuantity}</h1>
+                          <h1 className='pt-2'><span className='text-primary font-bold'>Minimum Quantity</span> {mQuantity}</h1>
                           <h1 className='pt-2'><span className='text-primary font-bold'>availableQuantity</span> {availableQuantity}</h1>
                           <div className='flex mt-5'>
-                          <button className="btn btn-sm bg-primary mt-6 mr-2">Decrease</button>
+                          <button className="btn btn-sm bg-primary mt-6 mr-2" onClick={handleDecrease}>Decrease</button>
                               <div>
-                              <form action="">
+                              <form onSubmit={QuantityIncrease} action="">
                                  <label htmlFor="supplier" className='text-secondary'>
                                  Quantity increase
                                  </label>
                                 <div className='flex'>
-                                <input type="number" placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs" />
+                                <input type="number" name="increase" placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs" />
                                 <button className="btn btn-sm bg-primary ml-2">increase</button>
                                 </div>
                                 </form>
@@ -51,7 +134,7 @@ const Purchase = () => {
                    <h1 className="text-primary text-2xl font-bold ">order</h1>
                    <div className=''>
                      <div>
-                     <form action="">
+                     <form onSubmit={handleOrder} action="">
                       <p>
                       <label htmlFor="supplier" className='text-primary font-bold'>
                         product name
@@ -75,25 +158,25 @@ const Purchase = () => {
                        name
                        </label>
                        </div>
-                       <input type="type" value={user?.displayName}placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+                       <input type="type" value={user?.displayName}placeholder="" className="input input-bordered input-sm w-full max-w-xs mt-2" />
                        <div>
                        <label htmlFor="supplier" className='text-primary font-bold'>
                         email Address
                        </label>
                        </div>
-                       <input type="type" value={user?.email}placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+                       <input type="type" value={user?.email}placeholder="" className="input input-bordered input-sm w-full max-w-xs mt-2" />
                        <div>
                        <label htmlFor="supplier" className='text-primary font-bold'>
                        Home address
                        </label>
                        </div>
-                       <input type="type" placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+                       <input type="type" name="address" placeholder="address" className="input input-bordered input-sm w-full max-w-xs mt-2" />
                        <div>
                        <label htmlFor="supplier" className='text-primary font-bold'>
                        phone Number
                        </label>
                        </div>
-                       <input type="type" placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+                       <input type="type" name="number" placeholder="number" className="input input-bordered input-sm w-full max-w-xs mt-2" />
                        <button type ="submit"className="btn btn-sm bg-primary ml-2">order Now</button>
                        </form>
                      </div>
