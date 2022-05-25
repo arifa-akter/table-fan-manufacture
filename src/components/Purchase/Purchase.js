@@ -8,7 +8,10 @@ const Purchase = () => {
     const [user] = useAuthState(auth)
     const {id} =useParams()
     const [purchase, setPurchase] =useState({})
-    const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name ,mQuantity} =purchase
+    const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name ,quantity} =purchase
+    const [newQuantity ,setQuantity]=useState('')
+    console.log(newQuantity)
+
        const [reload ,setIsReload] =useState(true)
     useEffect(()=>{
         fetch(`http://localhost:5000/tools/${id}`)
@@ -18,22 +21,24 @@ const Purchase = () => {
             setIsReload(!reload)
         })
     },[id , reload])
-
+ 
     const QuantityIncrease =(event) =>{
         event.preventDefault()
-        if(event.target.increase.value < 0 || event.target.increase.value === '0' ){
-            toast.error('quantity value is more then 0 please increase quantity')
+        if(event.target.increase.value === ''||event.target.increase.value < 0 || event.target.increase.value === '0'){
+           return toast.error('your input field is blank you cannot buy less then minQuantity')
         }
-        //  if(event.target.increase.value<mQuantity){
-        //     toast.error('you cannot buy less then minQuantity')
+        //  if(event.target.increase.value < minimumQuantity){
+        //     return toast.error('you cannot buy less then minQuantity  or negative value')
         // }
-        //  if(event.target.increase.value>availableQuantity){
-        //     toast.error('you cannot buy more then available quantity please put valid value')
-
-        // }
+        if(event.target.increase.value>availableQuantity || event.target.increase.value == availableQuantity ||newQuantity === availableQuantity){
+            console.log(quantity) 
+           return toast.error('you cannot buy more then available quantity')
+          
+        }
+        
         else{
             const quantityData={
-                quantity:parseInt(event.target.increase.value)+parseInt(minimumQuantity)
+                quantity:parseInt(event.target.increase.value)+parseInt(quantity)
             }
             fetch (`http://localhost:5000/tools/${id}`,{
                 method: 'PUT',
@@ -44,15 +49,20 @@ const Purchase = () => {
                 })
                 .then(res=>res.json())
                 .then(data=>{
-                    console.log('success data',data)
+                    console.log('success data',data)   
               })
+              setQuantity(quantityData.quantity)
         }
 
     }
     const handleDecrease =(event) =>{
         event.preventDefault()
+        if(quantity < 0 || quantity === '0') {
+            return toast.error('you can not Decrease less then minimum quantity')
+        }
+
         const quantityData={
-            quantity:parseInt(minimumQuantity)-parseInt(1)
+            quantity:parseInt(quantity)-parseInt(1)
         }
         fetch (`http://localhost:5000/tools/${id}`,{
             method: 'PUT',
@@ -66,15 +76,19 @@ const Purchase = () => {
                 console.log('success data',data)
 
           })
+          setQuantity(quantityData.quantity)
 
     }
 
     // handle order
     const handleOrder=(event)=>{
         event.preventDefault()
+        if(newQuantity!==minimumQuantity){
+            return toast.error('you can not order less min quantity')   
+        }
         const orders={
             product:name,
-            Quantity:minimumQuantity,
+            Quantity:quantity,
             price:perUnitPrice,
             email:user?.email,
             address:event.target.address.value,
@@ -111,8 +125,8 @@ const Purchase = () => {
                           <img style={{width:'200px', height:'200px'}}src={image} alt="" />
                           <h1 className='pt-2'>name: {name}</h1>
                           <h1 className='pt-2'><span className='text-primary font-bold'>per unit price</span> ${perUnitPrice}</h1>
-                          <h1 className='pt-2'><span className='text-primary font-bold'>Quantity</span> {minimumQuantity}</h1>
-                          <h1 className='pt-2'><span className='text-primary font-bold'>Minimum Quantity</span> {mQuantity}</h1>
+                          <h1 className='pt-2'><span className='text-primary font-bold'>minQuantity</span> {minimumQuantity}</h1>
+                          <h1 className='pt-2'><span className='text-primary font-bold'>quantity</span> {quantity==='0'?'0':quantity}</h1>
                           <h1 className='pt-2'><span className='text-primary font-bold'>availableQuantity</span> {availableQuantity}</h1>
                           <div className='flex mt-5'>
                           <button className="btn btn-sm bg-primary mt-6 mr-2" onClick={handleDecrease}>Decrease</button>
@@ -146,7 +160,7 @@ const Purchase = () => {
                         Quantity
                        </label>
                        </div>
-                       <input type="type" value={minimumQuantity}placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+                       <input type="type" value={quantity==='0'?'0':quantity}placeholder="set quantity" className="input input-bordered input-sm w-full max-w-xs mt-2" />
                        <div>
                        <label htmlFor="supplier" className='text-primary font-bold'>
                        perUnitPrice
@@ -177,7 +191,15 @@ const Purchase = () => {
                        </label>
                        </div>
                        <input type="type" name="number" placeholder="number" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+                       {quantity === minimumQuantity ||quantity >minimumQuantity?
                        <button type ="submit"className="btn btn-sm bg-primary ml-2">order Now</button>
+                       :
+                      <>
+                      <button type ="submit" disabled className="btn btn-sm bg-primary ml-2">order Now</button>
+                      <span className='text-secondary'>please enter minQuantity then button unable for order</span>
+                      </>
+                       }
+                       
                        </form>
                      </div>
                    </div>
