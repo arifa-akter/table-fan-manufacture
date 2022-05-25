@@ -15,6 +15,7 @@ import ManageProduct from './components/Dashboard/ManageProduct';
 import MyOrder from './components/Dashboard/MyOrder';
 import MyProfile from './components/Dashboard/MyProfile';
 import Home from './components/HomePage/Home';
+import MyPortfolio from './components/MyPortfolio/MyPortfolio';
 import Purchase from './components/Purchase/Purchase';
 import Footer from './components/Shares/Footer/Footer';
 import Header from './components/Shares/Header/Header';
@@ -33,6 +34,7 @@ function App() {
             <Purchase></Purchase>
           </RequireAuth>
         }></Route>
+        <Route path="/myPortfolio" element={<MyPortfolio></MyPortfolio>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/dashboard" element={<RequireAuth>
           <Dashboard></Dashboard>

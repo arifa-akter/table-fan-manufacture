@@ -23,6 +23,8 @@ const ManageOrder = () => {
               <th>email</th>
               <th>Quantity</th>
               <th>price</th>
+              <th>shipping</th>
+              <th>pending</th>
               </tr>
               </thead>
               <tbody>

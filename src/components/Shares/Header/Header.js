@@ -14,7 +14,7 @@ const Header = () => {
     };
     const menuItem =  <>
     <li><NavLink to="/" className="xl:text-lg font-medium text-white">Home</NavLink></li>
-    <li><Link to="" className="xl:text-lg font-medium text-white ">About</Link></li>
+    <li><Link to="/myPortfolio" className="xl:text-lg font-medium text-white ">my Portfolio</Link></li>
    {
      user &&  <li><NavLink to="/dashboard" className="xl:text-lg font-medium text-white">DashBoard</NavLink></li>
    }
