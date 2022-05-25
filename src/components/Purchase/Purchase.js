@@ -3,9 +3,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
 
 const Purchase = () => {
     const [user] = useAuthState(auth)
+    const [admin] =useAdmin(user)
     const {id} =useParams()
     const [purchase, setPurchase] =useState({})
     const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name ,quantity} =purchase
@@ -27,10 +29,10 @@ const Purchase = () => {
         if(event.target.increase.value === ''||event.target.increase.value < 0 || event.target.increase.value === '0'){
            return toast.error('your input field is blank you cannot buy less then minQuantity')
         }
-        //  if(event.target.increase.value < minimumQuantity){
+        //  if(newQuantity == availableQuantity){
         //     return toast.error('you cannot buy less then minQuantity  or negative value')
         // }
-        if(event.target.increase.value>availableQuantity || event.target.increase.value == availableQuantity ||newQuantity === availableQuantity){
+        if(event.target.increase.value>availableQuantity ||newQuantity == availableQuantity ||event.target.increase.value == availableQuantity ){
             console.log(quantity) 
            return toast.error('you cannot buy more then available quantity')
           
@@ -57,8 +59,8 @@ const Purchase = () => {
     }
     const handleDecrease =(event) =>{
         event.preventDefault()
-        if(quantity < 0 || quantity === '0') {
-            return toast.error('you can not Decrease less then minimum quantity')
+        if(quantity < 0 || quantity == 0) {
+            return toast.error('you can not Decrease less then 0')
         }
 
         const quantityData={
@@ -83,9 +85,9 @@ const Purchase = () => {
     // handle order
     const handleOrder=(event)=>{
         event.preventDefault()
-        if(newQuantity!==minimumQuantity){
-            return toast.error('you can not order less min quantity')   
-        }
+        // if(newQuantity!==minimumQuantity){
+        //     return toast.error('you can not order less min quantity')   
+        // }
         const orders={
             product:name,
             Quantity:quantity,
@@ -191,14 +193,25 @@ const Purchase = () => {
                        </label>
                        </div>
                        <input type="type" name="number" placeholder="number" className="input input-bordered input-sm w-full max-w-xs mt-2" />
-                       {quantity === minimumQuantity ||quantity >minimumQuantity?
-                       <button type ="submit"className="btn btn-sm bg-primary ml-2">order Now</button>
-                       :
-                      <>
-                      <button type ="submit" disabled className="btn btn-sm bg-primary ml-2">order Now</button>
-                      <span className='text-secondary'>please enter minQuantity then button unable for order</span>
-                      </>
+                       {
+                           admin?<>
+                             <button type ="submit" disabled className="btn btn-sm bg-primary ml-2">order Now</button>
+                             <span className='text-red-600'>admin can not place order</span>
+                                </> 
+                                
+                                :<>
+                                {quantity == minimumQuantity ||quantity >minimumQuantity?
+                                <button type ="submit"className="btn btn-sm bg-primary ml-2">order Now</button>
+                                :
+                                <>
+                                <button type ="submit" disabled className="btn btn-sm bg-primary ml-2">order Now</button>
+                                 <span className='text-red-600'>please enter minQuantity then button unable for order</span>
+                                 </>
+                                 }
+                                
+                               </>
                        }
+                      
                        
                        </form>
                      </div>

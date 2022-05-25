@@ -4,9 +4,22 @@ import { toast } from 'react-toastify';
 
 const AddProduct = () => {
       // react hook form
-      const { register, formState: { errors }, handleSubmit , reset } = useForm();
+      const { register, formState: { errors }, handleSubmit ,reset } = useForm();
          // add product submit part start 
     const onSubmit = async data => {
+      if(data.perUnitPrice < 0 || data.perUnitPrice === '0') {
+        reset()
+        return toast.error('you can not put 0 or negative')
+    }      
+      if(data.minimumQuantity < 0 || data.minimumQuantity === '0') {
+        reset()
+        return toast.error('you can not put 0 or negative')
+    }      
+      if(data.availableQuantity < 0 || data.availableQuantity === '0') {
+        reset()
+        return toast.error('you can not put 0 or negative')
+    }      
+
         const tools ={
             image:data.image,
             name:data.name,
@@ -14,7 +27,7 @@ const AddProduct = () => {
             minimumQuantity: data.minimumQuantity,
             availableQuantity: data.availableQuantity,
             description:data.description,
-            mQuantity:data.mQuantity
+            quantity:data.quantity
         }
         console.log(tools)
         fetch('http://localhost:5000/tools' ,{
@@ -166,13 +179,14 @@ const AddProduct = () => {
               </div>
               <div class="form-control w-full max-w-xs">
                  <label class="label">
-                   <span class="label-text">mQuantity</span>
+                   <span class="label-text"> initial quantity</span>
                  </label>
                  <input 
                  type="number" 
+                 value={'0'}
                  placeholder="product mQuantity" 
                  className="input input-bordered w-full max-w-xs"
-                 {...register("mQuantity", {
+                 {...register("quantity", {
                      required:{
                        value:true,
                        message:'name required enter name'

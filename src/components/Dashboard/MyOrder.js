@@ -28,6 +28,7 @@ const MyOrder = () => {
                 <th>phone</th>
                 <th>price</th>
                 <th>product</th>
+                <th>quantity</th>
                 </tr>
                 </thead>
                 <tbody>

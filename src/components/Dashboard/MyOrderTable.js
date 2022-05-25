@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MyOrderTable = ({emailUser ,index}) => {
-    const {email , phone ,price ,product}=emailUser
+    const {email , phone ,price ,product ,Quantity}=emailUser
     return (
         <tr>
         <th>{index+1}</th>
@@ -9,6 +9,7 @@ const MyOrderTable = ({emailUser ,index}) => {
         <td>{phone}</td>
         <td>{price}</td>
         <td>{product}</td>
+        <td>{Quantity}</td>
         </tr>
     );
 };
