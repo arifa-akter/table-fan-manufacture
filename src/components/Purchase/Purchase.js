@@ -13,6 +13,8 @@ const Purchase = () => {
     const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name ,quantity} =purchase
     const [newQuantity ,setQuantity]=useState('')
     console.log(newQuantity)
+    const totalPrice = parseInt(quantity)*parseInt(perUnitPrice)
+    console.log(totalPrice)
 
        const [reload ,setIsReload] =useState(true)
     useEffect(()=>{
@@ -94,7 +96,8 @@ const Purchase = () => {
             price:perUnitPrice,
             email:user?.email,
             address:event.target.address.value,
-            phone:event.target.number.value
+            phone:event.target.number.value,
+            totalPrice:totalPrice
 
         }
         console.log(orders)
@@ -193,6 +196,13 @@ const Purchase = () => {
                        </label>
                        </div>
                        <input type="type" name="number" placeholder="number" className="input input-bordered input-sm w-full max-w-xs mt-2" />
+
+                       <div>
+                       <label htmlFor="supplier" className='text-primary font-bold'>
+                       Total Price
+                       </label>
+                       </div>
+                       <input type="type" value={totalPrice} placeholder="number" className="input input-bordered input-sm w-full max-w-xs mt-2" />
                        {
                            admin?<>
                              <button type ="submit" disabled className="btn btn-sm bg-primary ml-2">order Now</button>
