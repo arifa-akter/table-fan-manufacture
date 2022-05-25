@@ -18,11 +18,11 @@ const MyPortfolio = () => {
                         <span className='font-bold lg:text-xl'>Bsc computer science and engineering from Nation university</span></p>
                         <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>technology:</span>
                         <span className='font-bold lg:text-xl'>I know about bootstrap tailwind react</span></p>
-                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>//http/websitelink</span></span>
+                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span></span>
                         </p>
-                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>//http/websitelink</span></span>
+                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span></span>
                         </p>
-                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>//http/websitelink</span></span>
+                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span></span>
                         </p>
                     </div>
                 </div>
