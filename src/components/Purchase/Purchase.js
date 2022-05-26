@@ -18,13 +18,7 @@ const Purchase = () => {
 
        const [reload ,setIsReload] =useState(true)
     useEffect(()=>{
-        fetch(`https://vast-springs-97654.herokuapp.com/tools/${id}`,{
-
-            headers:{
-                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
-            }
-
-        })
+        fetch(`https://vast-springs-97654.herokuapp.com/tools/${id}`)
         .then(res=>res.json())
         .then(data =>{
             setPurchase(data)
