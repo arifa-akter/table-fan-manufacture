@@ -4,13 +4,7 @@ import ReviewRow from './ReviewRow';
 const Review = () => {
     const [reviews , setReview] = useState([])
      useEffect(()=>{
-          fetch('https://vast-springs-97654.herokuapp.com/review'  ,{
-
-            headers:{
-                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
-            }
-
-        })
+          fetch('https://vast-springs-97654.herokuapp.com/review')
           .then(res=>res.json())
           .then(data=>setReview(data))
      } ,[])
