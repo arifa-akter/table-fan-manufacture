@@ -14,7 +14,7 @@ const Login = () => {
      // sign in with email and password
      const [signInWithEmailAndPassword,user,loading,error, ] = useSignInWithEmailAndPassword(auth);
     //  password reset
-     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+    //  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
      // react hook form
         const { register, formState: { errors }, handleSubmit } = useForm();
     
@@ -63,18 +63,18 @@ const Login = () => {
          signInWithEmailAndPassword(data.email ,data.password)
       
      };
-     const resetPassword= async()=>{
-      const email = emailRef.current.value
-      console.log(email)
-      if(email){
-          await sendPasswordResetEmail(email);
-          toast('Sent email please check email and set password');
-      }
-      else{
-          toast('please enter email'); 
-      }
+  //    const resetPassword= async()=>{
+  //     const email = emailRef.current.value
+  //     console.log(email)
+  //     if(email){
+  //         await sendPasswordResetEmail(email);
+  //         toast('Sent email please check email and set password');
+  //     }
+  //     else{
+  //         toast('please enter email'); 
+  //     }
     
-   }
+  //  }
          
 
 
@@ -159,7 +159,7 @@ const Login = () => {
               </div>
               {loginLoading}
               {loginError}
-              <span className='text-secondary'type="submit" onClick={resetPassword}>Forget password</span>
+               {/* <span className='text-secondary'type="submit" onClick={resetPassword}>Forget password</span> */}
               <button type="submit"className="btn input-bordered w-full max-w-xs bg-primary">Login</button>
               <span className='text-secondary'>New to Doctor portal? </span>
               <Link to="/register" ><span className='text-primary'>creat a new account</span></Link>
