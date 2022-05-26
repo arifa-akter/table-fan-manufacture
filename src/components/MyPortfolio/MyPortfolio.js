@@ -22,7 +22,7 @@ const MyPortfolio = () => {
                         </p>
                         <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span> https://car-inventory-613c5.web.app/</span>
                         </p>
-                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span></span>
+                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span>  https://table-fan-parts.firebaseapp.com/</span>
                         </p>
                     </div>
                 </div>
