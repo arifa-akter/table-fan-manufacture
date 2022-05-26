@@ -14,13 +14,7 @@ const PaymentOrder = () => {
    
     
     useEffect(()=>{
-        fetch(`https://vast-springs-97654.herokuapp.com/orderPayment/${id}` ,{
-
-            headers:{
-                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
-            }
-
-        })
+        fetch(`https://vast-springs-97654.herokuapp.com/orderPayment/${id}`)
         .then(res=>res.json())
         .then(data=>setOrderPayment(data))
    
@@ -47,7 +41,7 @@ const PaymentOrder = () => {
             </div>
             </div>
         </div>
-    );
+   );
 };
 
 export default PaymentOrder;
