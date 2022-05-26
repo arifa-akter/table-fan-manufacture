@@ -14,7 +14,7 @@ const PaymentOrder = () => {
    
     
     useEffect(()=>{
-        fetch(`http://localhost:5000/orderPayment/${id}` ,{
+        fetch(`https://vast-springs-97654.herokuapp.com/orderPayment/${id}` ,{
 
             headers:{
                 'authorization':`Bearer ${localStorage.getItem('accessToken')}`

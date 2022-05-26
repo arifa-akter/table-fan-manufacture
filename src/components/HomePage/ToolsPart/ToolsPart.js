@@ -5,7 +5,7 @@ const ToolsPart = () => {
     const [fanTools ,setFanTools] = useState([])
     console.log(fanTools)
     useEffect(()=>{
-        fetch('http://localhost:5000/tools')
+        fetch('https://vast-springs-97654.herokuapp.com/tools')
         .then(res=>res.json())
         .then(data=>setFanTools(data))
     },[])

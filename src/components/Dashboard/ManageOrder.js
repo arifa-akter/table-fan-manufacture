@@ -5,7 +5,7 @@ import ManageOrderTable from './ManageOrderTable';
 
 const ManageOrder = () => {
     const {data: allOrder ,isLoading} = useQuery('allOrder',
-    ()=> fetch( 'http://localhost:5000/order',).then(res=>{
+    ()=> fetch( 'https://vast-springs-97654.herokuapp.com/order',).then(res=>{
         return res.json()
        }
         ))

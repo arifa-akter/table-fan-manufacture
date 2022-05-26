@@ -5,7 +5,7 @@ const DeleteModal = ({deleteModal , setDeleteModal ,refetch}) => {
     const { _id ,name} = deleteModal
     const handleProduct =(id)=>{
         console.log(id)
-        fetch(`http://localhost:5000/tools/${_id}` , {
+        fetch(`https://vast-springs-97654.herokuapp.com/tools/${_id}` , {
           method:'DELETE'
         })
         .then(res => res.json())

@@ -19,7 +19,7 @@ const MyProfile = () => {
          linkDin:data.linkDin
       }
       console.log(profile)
-      fetch('http://localhost:5000/profile' ,{
+      fetch('https://vast-springs-97654.herokuapp.com/profile' ,{
           method:'POST',
           headers:{
               'content-type':'application/json',

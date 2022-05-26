@@ -15,9 +15,9 @@ const MyPortfolio = () => {
                         <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>Email Address:</span>
                         <span className='font-bold lg:text-xl'>arifaakterchoity@gamil.com</span></p>
                         <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>Education:</span>
-                        <span className='font-bold lg:text-xl'>Bsc computer science and engineering from Nation university</span></p>
-                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>technology:</span>
-                        <span className='font-bold lg:text-xl'>I know about bootstrap tailwind react</span></p>
+                        <span className='font-bold lg:text-xl'>Bsc computer science and engineering from National university</span></p>
+                        <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>Technology:</span>
+                        <span className='font-bold lg:text-xl'>I know about bootstrap, tailwind, react.js node.js mongodb </span></p>
                         <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span></span>
                         </p>
                         <p className="mb-5"><span className='font-bold lg:text-xl text-secondary pr-3'>link :<span className='text-accent'>websiteLink</span></span>

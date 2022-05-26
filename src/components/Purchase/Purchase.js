@@ -12,13 +12,19 @@ const Purchase = () => {
     const [purchase, setPurchase] =useState({})
     const{image ,perUnitPrice ,minimumQuantity,availableQuantity ,name ,quantity} =purchase
     const [newQuantity ,setQuantity]=useState('')
-    console.log(newQuantity)
+    // console.log(newQuantity)
     const totalPrice = parseInt(quantity)*parseInt(perUnitPrice)
-    console.log(totalPrice)
+    // console.log(totalPrice)
 
        const [reload ,setIsReload] =useState(true)
     useEffect(()=>{
-        fetch(`http://localhost:5000/tools/${id}`)
+        fetch(`https://vast-springs-97654.herokuapp.com/tools/${id}`,{
+
+            headers:{
+                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
+            }
+
+        })
         .then(res=>res.json())
         .then(data =>{
             setPurchase(data)
@@ -44,7 +50,7 @@ const Purchase = () => {
             const quantityData={
                 quantity:parseInt(event.target.increase.value)+parseInt(quantity)
             }
-            fetch (`http://localhost:5000/tools/${id}`,{
+            fetch (`https://vast-springs-97654.herokuapp.com/tools/${id}`,{
                 method: 'PUT',
                 headers:{
                     'content-type':'application/json'
@@ -68,7 +74,7 @@ const Purchase = () => {
         const quantityData={
             quantity:parseInt(quantity)-parseInt(1)
         }
-        fetch (`http://localhost:5000/tools/${id}`,{
+        fetch (`https://vast-springs-97654.herokuapp.com/tools/${id}`,{
             method: 'PUT',
             headers:{
                 'content-type':'application/json'
@@ -101,7 +107,7 @@ const Purchase = () => {
 
         }
         console.log(orders)
-        fetch('http://localhost:5000/order' ,{
+        fetch('https://vast-springs-97654.herokuapp.com/order' ,{
             method:'POST',
             headers:{
                 'content-type':'application/json',

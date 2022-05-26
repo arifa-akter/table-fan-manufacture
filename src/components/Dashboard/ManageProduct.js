@@ -8,7 +8,7 @@ import ManageProductTable from './ManageProductTable';
 const ManageProduct = () => {
     const [deleteModal ,setDeleteModal] =useState(null)
     const {data: manageProduct ,isLoading ,refetch} = useQuery('manageProduct',
-    ()=> fetch( 'http://localhost:5000/tools',).then(res=>{
+    ()=> fetch( 'https://vast-springs-97654.herokuapp.com/tools',).then(res=>{
         return res.json()
        }
         ))

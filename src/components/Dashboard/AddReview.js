@@ -31,10 +31,11 @@ const AddReview = () => {
                             description:data.description
                         }
                         // insert doctor in mongo db
-                        fetch('http://localhost:5000/review' ,{
+                        fetch('https://vast-springs-97654.herokuapp.com/review' ,{
                             method:'POST',
                             headers:{
                                 'content-type':'application/json',
+                                'authorization':`Bearer ${localStorage.getItem('accessToken')}`
                             },
                             body:JSON.stringify(review)
                         })

@@ -13,7 +13,7 @@ const CheckoutForm = ({orderPayment}) => {
     const { totalPrice ,email} = orderPayment;
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://vast-springs-97654.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

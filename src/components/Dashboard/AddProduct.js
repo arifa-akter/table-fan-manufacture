@@ -30,7 +30,7 @@ const AddProduct = () => {
             quantity:data.quantity
         }
         console.log(tools)
-        fetch('http://localhost:5000/tools' ,{
+        fetch('https://vast-springs-97654.herokuapp.com/tools' ,{
             method:'POST',
             headers:{
                 'content-type':'application/json',

@@ -4,7 +4,7 @@ import Loading from '../Authentication/Loading'
 import UserTable from './UserTable';
 const MakeAdmin = () => {
     const {data: users ,isLoading , refetch} = useQuery('users',
-    ()=> fetch( 'http://localhost:5000/user', {
+    ()=> fetch( 'https://vast-springs-97654.herokuapp.com/user', {
         method:'GET',
         headers:{
             authorization:`Bearer ${localStorage.getItem('accessToken')}`
