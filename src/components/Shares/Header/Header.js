@@ -13,13 +13,13 @@ const Header = () => {
       localStorage.removeItem('accessToken')
     };
     const menuItem =  <>
-    <li><NavLink to="/" className="xl:text-lg font-medium text-white">Home</NavLink></li>
-    <li><Link to="/myPortfolio" className="xl:text-lg font-medium text-white ">my Portfolio</Link></li>
+    <li><NavLink to="/" className="xl:text-lg font-medium lg:text-white">Home</NavLink></li>
+    <li><Link to="/myPortfolio" className="xl:text-lg font-medium lg:text-white ">my Portfolio</Link></li>
    {
-     user &&  <li><NavLink to="/dashboard" className="xl:text-lg font-medium text-white">DashBoard</NavLink></li>
+     user &&  <li><NavLink to="/dashboard" className="xl:text-lg font-medium lg:text-white">DashBoard</NavLink></li>
    }
 
-    <li><NavLink to="/blogs" className="xl:text-lg font-medium text-white">Blogs</NavLink></li>
+    <li><NavLink to="/blogs" className="xl:text-lg font-medium lg:text-white">Blogs</NavLink></li>
     </>
 
     return (
@@ -61,9 +61,9 @@ const Header = () => {
             </div>
             <Link to="/" className="header-Tital btn btn-ghost normal-case text-base xl:text-xl">Table Fan Part</Link>
           </div>
-          <div className="navbar-center hidden lg:flex ">
+          <div className="navbar-center hidden lg:flex">
             <div className="ml-[170px]">
-            <ul className="menu menu-horizontal p-0 header-menu">
+            <ul className="menu menu-horizontal p-0 header-menu text-white-none">
             {menuItem}
             </ul>
             </div>
